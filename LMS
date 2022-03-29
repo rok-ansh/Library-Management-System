@@ -1,0 +1,121 @@
+package LibraryManagement;
+
+import java.util.Scanner;
+
+public class LMS {
+    public static void main(String[] args) {
+
+        char r = 0;
+        do {
+            System.out.println("-------Library Management------");
+            System.out.println("Press 1 to add books");
+            System.out.println("Press 2 to issue books");
+            System.out.println("Press 3 to return books ");
+            System.out.println("Press 4 to print complete issue details");
+            System.out.println("Press 5 to exit");
+            Scanner obj1 = new Scanner(System.in);
+            System.out.println("Enter any Number");
+            int number = obj1.nextInt();
+            switch (number) {
+                case 1:
+                    Library lib1 = new Library();
+                    lib1.add();
+                    break;
+                case 2:
+                    Library lib2 = new Library();
+                    lib2.issue();
+                    break;
+                case 3:
+                    Library lib3 = new Library();
+                    lib3.return_book();
+                    break;
+                case 4:
+                    Library lib4 = new Library();
+                    lib4.detail();
+                    break;
+                case 5:
+                    Library lib5 = new Library();
+                    lib5.exit();
+                    break;
+                default:
+                    System.out.println("Invalid Number");
+            }
+
+            System.out.println("You want to select next Option Y/N");
+            obj1.next().charAt(0);
+        }
+        while (r == 'y' || r == 'Y') ;
+        if (r == 'n' || r == 'N') {
+                Library z = new Library();
+                z.exit();
+        }
+
+    }
+}
+class Library{
+    // We write static in order to remember the last value
+    static String book_name, issue_date, return_date;
+    static int ID, number_of_book_issue;
+
+    void add(){
+        System.out.println("Enter Book_Name, Price, Book_No");
+        // Creating a object
+        Scanner obj2 = new Scanner(System.in);
+        String str = obj2.nextLine();
+        float price = obj2.nextInt();
+        int book_no = obj2.nextInt();
+        System.out.println("Your details is: "+ str+" " + price+" " + book_no);
+    }
+
+    void issue(){
+        // Creating a object
+        Scanner obj3 = new Scanner(System.in);
+        System.out.println("Book Name");
+        book_name = obj3.nextLine();
+        System.out.println("Book_ID");
+        // So that dono sath me run na ho break jaisa use ho raha hai
+        ID = obj3.nextInt();
+        obj3.nextLine();
+        System.out.println("Issue Date");
+        issue_date = obj3.nextLine();
+        System.out.println("Total number of Book to Issue");
+        number_of_book_issue = obj3.nextInt();
+        obj3.nextLine();
+        System.out.println("Return Date ");
+        return_date = obj3.nextLine();
+
+    }
+    int getID(){
+        return ID;
+    }
+
+    void return_book(){
+        System.out.println("Enter Student_Name & Book_ID");
+        Scanner obj4 = new Scanner(System.in);
+        String name = obj4.nextLine();
+        int book_ID = obj4.nextInt();
+        // Checking the same book he is returning with book_ID
+        if(ID == book_ID){
+            System.out.println("Total details");
+            System.out.println("Book Name: " + Library.book_name);
+            System.out.println("Book ID: "+ Library.ID);
+            System.out.println("Issue Date: "+ Library.issue_date);
+            System.out.println("Total Number of Book Issued:" + Library.number_of_book_issue);
+            System.out.println("Return Date: "+ Library.return_date);
+        }
+        else{
+            System.out.println("Wrong ID, Please correct ID");
+        }
+    }
+    void detail(){
+
+        System.out.println("Book Name: " + Library.book_name);
+        System.out.println("Book ID: "+ Library.ID);
+        System.out.println("Issue Date: "+ Library.issue_date);
+        System.out.println("Total Number of Book Issued:" + Library.number_of_book_issue);
+        System.out.println("Return Date: "+ Library.return_date);
+    }
+    void exit (){
+        System.exit(0);
+    }
+}
